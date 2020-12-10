@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if ! pgrep -q tmux ; then
+if ! pgrep tmux 1>/dev/null 2>&1 ; then
 	echo "tmux not running... retry running script from within tmux"
 	exit 1
 fi
@@ -28,5 +28,8 @@ echo "unbind-key C-a" >> $CONF
 echo "unbind-key C-b" >> $CONF
 echo "bind-key C-a send-prefix" >> $CONF
 echo "bind-key C-b send-prefix -2" >> $CONF
+
+echo "Setting scrollback limit to 100,000"
+echo "set-option -g history-limit 100000" >> $CONF
 
 echo "Done."
