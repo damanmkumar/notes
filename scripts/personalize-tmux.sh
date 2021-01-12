@@ -20,6 +20,8 @@ tmux show -g | sed 's/^/set-option -g /' | cat > $CONF
 echo "Changing prefix and prefix2..."
 sed -i 's/^.* prefix .*$/set-option -g prefix C-a/' $CONF
 sed -i 's/^.* prefix2 .*$/set-option -g prefix2 C-b/' $CONF
+echo "Changing default-command..."
+sed -i 's/^.* default-command .*$/set-option -g default-command ""/' $CONF
 
 echo "Re-binding double-press to send prefix key..."
 echo "" >> $CONF
