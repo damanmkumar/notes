@@ -22,5 +22,34 @@ xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Axes" 6 7 4 5
 xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Inertia" 1
 ```
 
+### Network configuration
+
+We want to choose the ethernet interface when available, and fallback on  
+WiFi otherwise. To do so, we create a virtual trunk interface, and  
+configure it as follows:
+
+`/etc/hostname.trunk0`:  
+```
+# we want the interface to failover to wireless
+# when a wired connection is unavailable
+# em0 should be the "master" interface/port
+trunkproto failover trunkport em0 trunkport iwn0
+dhcp
+```
+
+The ethernet and WiFi interfaces are configured as:
+
+`/etc/hostname.em0`:  
+```
+up
+```
+
+`/etc/hostname.iwn0`:  
+```
+join "ESSID" wpakey "key" # passed to ifconfig
+...
+up
+```
+
 ### References
 [1] https://gibbel.us/openbsd/trackpoint.html
