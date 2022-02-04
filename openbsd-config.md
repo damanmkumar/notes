@@ -14,7 +14,7 @@ mousepad.tp.disable=1
 ```
 
 To be able to scroll using the TrackPoint, add the following to
-`/etc/X11/xenodm/Xsession` [1]:  
+`/etc/X11/xenodm/Xsession` or `$HOME/.xsession` [1]:  
 ```
 xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation" 1
 xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Button" 2

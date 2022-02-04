@@ -1,0 +1,19 @@
+#! /bin/sh
+
+# ksh(1) sources the file pointed to by ENV when using a WM,
+# since there is no login shell
+export ENV=$HOME/.kshrc
+
+# enable scrolling via TrackPoint
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation" 2
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Button" 2
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Axes" 6 7 4 5
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Inertia" 1
+
+# start dwm
+dstat trunk0 &
+if [ -x $HOME/.local/bin/dwm ]; then
+	$HOME/.local/bin/dwm
+else
+	/usr/X11R6/bin/fvwm
+fi
